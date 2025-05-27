@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/SQLBuilder.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/model/helper/ColumnType.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/SelectStatementBuilder.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/database/Connector.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/model/Model.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/view/MainTest.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/model/helper/ColumnInfo.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/createschema/Column.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/filler/Filler.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/database/migration/User.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/UpdateStatementBuilder.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/InsertStatementBuilder.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/database/migration/TableSchema.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/model/Book.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/Builder.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/database/DatabaseInsertable.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/model/AbstractModel.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/ColumnData.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/StatementFillable.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/DeleteStatementBuilder.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/view/API.java</file>
+        </group>
+    </open-files>
+</project-private>
