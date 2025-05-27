@@ -16,7 +16,7 @@ public class Connector{
     private String url = "jdbc:mysql://localhost:3306/";
     private String user = "root";
     private String password = "";
-    private String database = "oop";
+    private String database = "jdbclibrary";
     private static Connector instance;
     private Connection con;
     

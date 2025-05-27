@@ -60,7 +60,12 @@ public class Column {
      * @return 
      */
     public Column primary(){
-        this.sql += " PRIMARY KEY";
+        primary(false);
+        return this;
+    }
+    
+    public Column primary(boolean autoIncrement){
+        this.sql += " PRIMARY KEY" + (autoIncrement ? " AUTO_INCREMENT " : "");
         return this;
     }
     

@@ -15,14 +15,14 @@ import jdbclibrary.model.helper.ColumnType;
  * @author Al-Reecha
  */
 public class Filler {
-    public PreparedStatement fillParams(StatementFillable statement, HashMap<String, String> data, HashMap<String, ColumnInfo> columnInfos) throws SQLException{
+    public static PreparedStatement fillParams(StatementFillable statement, HashMap<String, ColumnInfo> columnInfos) throws SQLException{
         PreparedStatement stmt = Connector.getInstance().getConnection()
                 .prepareStatement(statement.toString());
         setTypes(statement, columnInfos);
         var params = statement.getParams();
-        data.forEach((key, value) -> {
-            params.get(key).setValue(value);
-        });
+//        data.forEach((key, value) -> {
+//            params.get(key).setValue(value);
+//        });
         params.forEach((key, value) -> {
             try {
                 if(value.getType().equals(ColumnType.STRING)){
@@ -37,7 +37,7 @@ public class Filler {
         return stmt;
     }
     
-    private StatementFillable setTypes(StatementFillable statement, HashMap<String, ColumnInfo> columnInfo){
+    private static StatementFillable setTypes(StatementFillable statement, HashMap<String, ColumnInfo> columnInfo){
         statement.getParams().forEach((key, value) -> {
             value.setType(columnInfo.get(key).getType());
         }); 

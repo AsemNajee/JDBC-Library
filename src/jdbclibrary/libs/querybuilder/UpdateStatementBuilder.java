@@ -15,11 +15,6 @@ public class UpdateStatementBuilder implements StatementFillable{
     private String table;
     private HashMap<String, ColumnData> params;
 
-    /**
-     * update "students" 
-     * SET "username" = ?, 'id' = ?
-     * WHERE id = ?;
-     */
     UpdateStatementBuilder(String table) {
         this.params = new HashMap<>();
         this.table = table;
@@ -28,6 +23,7 @@ public class UpdateStatementBuilder implements StatementFillable{
     
     public UpdateStatementBuilder set(String column, String value){
         params.put(column, new ColumnData(index++, null));
+        params.get(column).setValue(value);
         return this;
     }
     

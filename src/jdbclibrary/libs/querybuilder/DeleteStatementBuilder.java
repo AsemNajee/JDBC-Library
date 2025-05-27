@@ -38,7 +38,7 @@ public class DeleteStatementBuilder {
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("DELETE FROM ").append(table);
+        sb.append("DELETE FROM \"").append(table).append("\"");
         if(!(conditions == null || conditions.isEmpty())){
             sb.append(" WHERE ");
             conditions.forEach(condition -> {
