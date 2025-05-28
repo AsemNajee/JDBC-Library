@@ -5,8 +5,7 @@ import java.util.HashMap;
 import jdbclibrary.libs.querybuilder.query.Condition;
 
 /**
- * @Coder Asem Najee
- * @author Al-Reecha
+ * @author Asem
  */
 public class UpdateStatementBuilder implements StatementFillable{
     
@@ -21,12 +20,21 @@ public class UpdateStatementBuilder implements StatementFillable{
         this.conditions = new ArrayList<>();
     }
     
+    /**
+     * select column to update and give it a new value
+     * @param column name of column in the database
+     * @param value new value to update 
+     * @return 
+     */
     public UpdateStatementBuilder set(String column, String value){
-        params.put(column, new ColumnData(index++, null));
-        params.get(column).setValue(value);
+        params.put(column, new ColumnData(index++, value));
         return this;
     }
     
+    /**
+     * getter for params member
+     * @return 
+     */
     public HashMap<String, ColumnData> getParams(){
         return this.params;
     }
@@ -40,17 +48,29 @@ public class UpdateStatementBuilder implements StatementFillable{
     public UpdateStatementBuilder where(String column, String value){
         return where(column, "=", value);
     }
+    
+    /**
+     * add condition to the SQL statement
+     * @param column is the column in the database to compare
+     * @param operator is the operator to compare column and value
+     * @param value value to equal it with the value of the column
+     * @return 
+     */
     public UpdateStatementBuilder where(String column, String operator, String value){
         conditions.add(new Condition(column, operator, value));
         return this;
     }
     
+    /**
+     * get final sql statement 
+     * @return 
+     */
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("UPDATE \"").append(table).append("\" SET ");
+        sb.append("UPDATE `").append(table).append("` SET ");
         params.keySet().forEach(col -> {
-            sb.append("\"").append(col).append("\" = ?,");
+            sb.append("`").append(col).append("` = ?,");
         });
         sb.deleteCharAt(sb.length()-1);
         sb.append(" ");

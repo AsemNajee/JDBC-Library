@@ -4,6 +4,10 @@ import java.sql.SQLException;
 import jdbclibrary.database.Connector;
 import jdbclibrary.libs.querybuilder.createschema.Column;
 
+/**
+ * Create new table in database 
+ * @author Asem
+ */
 public final class TableSchema {
     
     private TableSchema(){}
@@ -11,16 +15,19 @@ public final class TableSchema {
     /**
      * create new table in database
      * @param tableName 
-     * @param colsData columns as Column
+     * @param colsData columns as Column class with them data
      * @throws SQLException 
      */
     public final static void create(String tableName, Column ...colsData) throws SQLException{
-        String sql = "CREATE TABLE " + tableName + "(";
+        String sql = "CREATE OR REPLACE TABLE `" + tableName + "` (\n";
         for(Column s : colsData){
-            sql += s.getSql() + " ,\n";
+            sql += s.getSql() + ",\n";
         }
-        sql.substring(0, sql.length() -3);
+        System.out.println(sql);
+        sql = sql.substring(0, sql.length() -2);
         sql += ")";
+        
+        System.out.println(sql);
         
         var c = Connector.getInstance().getConnection();
         var stat = c.prepareStatement(sql);

@@ -17,7 +17,7 @@ public class Join{
     
     public String getJoin(){
         String join = "";
-        join += " " + type + " JOIN " + table + " ON " + firstTableColumn + " = " + secondTableColumn ;
+        join += " " + type + " JOIN `" + table + "` `" + alias + "` ON `" + firstTableColumn + "` = `" + secondTableColumn + "`";
         return join;
     }
 }

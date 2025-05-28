@@ -1,14 +1,10 @@
- /**
-  *   >> Al-Reecha .~
-  *   << BY : Asem Najee >>
-  */
-
 package jdbclibrary.database;
 import java.sql.*;
 
 /**
- * @Coder Asem Najee
- * @author Al-Reecha
+ * @author Asem Najee
+ * connect with database 
+ * singleton pattern
  */
 public class Connector{
     

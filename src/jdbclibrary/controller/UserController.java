@@ -5,17 +5,16 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jdbclibrary.model.AbstractModel;
 import jdbclibrary.model.UserModel;
 
 /**
  * example of controller
+ * @author Asem Najee
  */
-public class UserController extends Controller{
+public class UserController{
     
-    /**
-     * use static instance to simplify use the UserController by static methods
-     */
-    private static UserController controller;
+    private static AbstractModel model;
     private static Scanner in = new Scanner(System.in);
     
     /**
@@ -23,14 +22,10 @@ public class UserController extends Controller{
      */
     static {
         try {
-            controller = new UserController();
+            model = new UserModel();
         } catch (SQLException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
-    }
-    
-    private UserController() throws SQLException {
-        super(new UserModel());
     }
     
     /**
@@ -43,7 +38,41 @@ public class UserController extends Controller{
         data.put("name", in.nextLine());
         System.out.print("Enter user age: ");
         data.put("age", in.next()); // use next() because hash map is type of <string, string>
-        controller.model.create(data);
+        model.create(data);
     }
     
+    public static void update() throws SQLException{
+        HashMap<String, String> data = new HashMap<>();
+        System.out.print("Enter user id: ");
+        int id = in.nextInt();
+        System.out.print("Enter user name: ");
+        data.put("name", in.nextLine());
+        System.out.print("Enter user age: ");
+        data.put("age", in.next());
+        model.update(id, data);
+    }
+    
+    public static void delete() throws SQLException{
+        System.out.print("Enter user id: ");
+        int id = in.nextInt();
+        model.delete(id);
+    }
+    
+    public static void getByID() throws SQLException{
+        System.out.print("Enter user id: ");
+        int id = in.nextInt();
+        System.out.println(model.get(id));
+    }
+    
+    public static void getWhere() throws SQLException{
+        System.out.print("Enter condition column: ");
+        String column = in.nextLine();
+        System.out.print("Enter condition value: ");
+        String value = in.nextLine();
+        System.out.println(model.getWhere(column, value));
+    }
+    
+    public static void getAll() throws SQLException{
+        System.out.println(model.getAll());
+    }
 }

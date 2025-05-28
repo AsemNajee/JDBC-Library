@@ -1,8 +1,7 @@
 package jdbclibrary.model.helper;
 
 /**
- * @Coder Asem Najee
- * @author Al-Reecha
+ * @author Asem
  */
 public class ColumnInfo{
     private ColumnType type;

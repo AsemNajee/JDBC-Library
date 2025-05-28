@@ -1,10 +1,9 @@
- /**
-  *   >> Al-Reecha .~
-  *   << BY : Asem Najee >>
-  */
-
 package jdbclibrary.model.helper;
 
+/**
+ * constraint on type of column accepted to create in the database .
+ * @author Asem
+ */
 public enum ColumnType{
     STRING("string"), INT("int");
     

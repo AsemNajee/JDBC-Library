@@ -18,7 +18,7 @@ public class Condition{
 
     @Override
     public String toString() {
-        return column + " " + operator + " " + value;
+        return "`" + column + "` " + operator + " '" + value + "'";
     }
     
 }

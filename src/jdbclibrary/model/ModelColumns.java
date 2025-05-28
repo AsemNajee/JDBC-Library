@@ -1,8 +1,3 @@
- /**
-  *   >> Al-Reecha .~
-  *   << BY : Asem Najee >>
-  */
-
 package jdbclibrary.model;
 
 import java.util.ArrayList;
@@ -10,8 +5,7 @@ import java.util.HashMap;
 import jdbclibrary.model.helper.ColumnInfo;
 
 /**
- * @Coder Asem Najee
- * @author Al-Reecha
+ * @author Asem
  */
 public abstract class ModelColumns {
     

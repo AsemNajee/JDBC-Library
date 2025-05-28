@@ -1,15 +1,10 @@
- /**
-  *   >> Al-Reecha .~
-  *   << BY : Asem Najee >>
-  */
-
 package jdbclibrary.controller;
 
 import jdbclibrary.model.AbstractModel;
 
 /**
- * @Coder Asem Najee
- * @author Al-Reecha
+ * control functions of the system
+ * @author Asem Najee
  */
 public class Controller {
     protected AbstractModel model ;

@@ -4,22 +4,44 @@ import java.util.ArrayList;
 import java.util.List;
 import jdbclibrary.libs.querybuilder.query.Condition;
 import jdbclibrary.libs.querybuilder.query.Join;
+import jdbclibrary.model.AbstractModel;
 
 
 /**
  * Build sql statements for select statements
- * @Coder Asem Najee
- * @author Al-Reecha
+ * @author Asem
  */
 public class SelectStatementBuilder {
+    /**
+     * list of columns to select them from the database .
+     */
     private ArrayList<String> selectColumns;
     private String table;
     private String alias;
+    /**
+     * list of conditions
+     */
     private ArrayList<Condition> conditions;
+    /**
+     * list of joins
+     */
     private ArrayList<Join> joins;
+    /**
+     * list of columns names to group by
+     */
     private ArrayList<String> groupBy;
+    /**
+     * list of columns to order by 
+     */
     private ArrayList<String> orderBy;
+    /**
+     * max count rows in query of select
+     */
     private int limit = -1;
+    /**
+     * start from row number 
+     */
+    private int offset = 0;
     
     SelectStatementBuilder(){
         selectColumns = new ArrayList<>();
@@ -30,7 +52,7 @@ public class SelectStatementBuilder {
     }
     
     /**
-     * execute the final query 
+     * select columns which will get from database .
      * @param columns are columns which will be get from the database
      * don't send any thing to select * 
      * @return final query as string
@@ -48,6 +70,14 @@ public class SelectStatementBuilder {
     public SelectStatementBuilder from(String tableName){
         return from(tableName, tableName);
     }
+    
+    /**
+     * select the table name here
+     * @param tableName is the table name
+     * @param alias is alias for table name
+     * this used when we use join conditions
+     * @return 
+     */
     public SelectStatementBuilder from(String tableName, String alias){
         this.table = tableName;
         this.alias = alias;
@@ -63,6 +93,14 @@ public class SelectStatementBuilder {
     public SelectStatementBuilder where(String column, String value){
         return where(column, "=", value);
     }
+    
+    /**
+     * add condition to the SQL statement
+     * @param column is the column in the database to compare
+     * @param operator is the operator to compare column and value
+     * @param value value to equal it with the value of the column
+     * @return 
+     */
     public SelectStatementBuilder where(String column, String operator, String value){
         conditions.add(new Condition(column, operator, value));
         return this;
@@ -118,22 +156,46 @@ public class SelectStatementBuilder {
      * @return 
      */
     public SelectStatementBuilder limit(int limit){
-        this.limit = limit > 0 ? limit : 10;
+        this.limit = limit > 0 ? limit : AbstractModel.DEFAULT_LIMIT;
         return this;
     }
     
+    /**
+     * choose how many row skip before start get data
+     * @param offset
+     * @return 
+     */
+    public SelectStatementBuilder offset(int offset){
+        this.offset = offset > 0 ? offset : 0;
+        return this;
+    }
     
+    /**
+     * get final sql statement 
+     * @return 
+     */
     @Override
     public String toString(){
         StringBuilder totalSql = new StringBuilder("SELECT ");
         if(!(selectColumns == null || selectColumns.isEmpty())){
             selectColumns.forEach(column -> {
-                totalSql.append(column).append(",");
+                String columnName[] = column.split(" as ");
+                String name = columnName[0];
+                String alias = columnName.length > 1 ? columnName[1] : "";
+                if(name.contains(" ")){
+                    totalSql.append("`").append(name).append("`");
+                    if(!alias.equals("")){
+                        totalSql.append(" as `").append(alias).append("`");
+                    }
+                }else{
+                    totalSql.append(column);
+                }
+                totalSql.append(",");
             });
             totalSql.delete(totalSql.lastIndexOf(","), totalSql.length());
         }
         
-        totalSql.append(" FROM ").append(table).append(" ").append(alias);
+        totalSql.append(" FROM `").append(table).append("` `").append(alias).append("`");
         if(!(joins == null || joins.isEmpty())){
             joins.forEach(join -> totalSql.append(join.getJoin()));
         }
@@ -150,16 +212,19 @@ public class SelectStatementBuilder {
         if(!(groupBy == null || groupBy.isEmpty())){
             totalSql.append(" GROUP BY ");
             groupBy.forEach(column -> {
-                totalSql.append(column).append(",");
+                totalSql.append("`").append(column).append("`,");
             });
             totalSql.delete(totalSql.lastIndexOf(","), totalSql.length());
         }
         if(!(orderBy == null || orderBy.isEmpty())){
             totalSql.append(" ORDER BY ");
             orderBy.forEach(column -> {
-                totalSql.append(column).append(",");
+                totalSql.append("`").append(column).append("`,");
             });
             totalSql.delete(totalSql.lastIndexOf(","), totalSql.length());
+        }
+        if(offset != 0){
+            totalSql.append(" OFFSET ").append(offset);
         }
         if(limit != -1){
             totalSql.append(" LIMIT ").append(limit);

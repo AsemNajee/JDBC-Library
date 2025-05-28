@@ -32,26 +32,33 @@ public class Column {
         return create(columnName, "INT", length);
     }
     public static Column integer(String columnName){
-        return string(columnName, DEFAULT_INT_LENGTH);
+        return integer(columnName, DEFAULT_INT_LENGTH);
     }
     
-    public static String enumeration(String tableName, String ...params) throws SQLException{
+    /**
+     * add column with predefinde values as enum
+     * @param columnName is the column name
+     * @param scope acceptable values
+     * @return
+     * @throws SQLException 
+     */
+    public static String enumeration(String columnName, String ...scope) throws SQLException{
         String paramsImploded = "";
-        for(String p : params){
-            paramsImploded += p + ",";
+        for(String p : scope){
+            paramsImploded += "'" + p + "',";
         }
         if(!paramsImploded.equals("")){
-            paramsImploded.substring(0, paramsImploded.length() - 1);
+            paramsImploded = paramsImploded.substring(0, paramsImploded.length() - 1);
         }else{
             throw new SQLException();
         }
-        return tableName + " enum(" + paramsImploded + ")";
+        return "`" + columnName + "` enum(" + paramsImploded + ")";
     }
     
     private static Column create(String columnName, String type, int length){
         Column sb = new Column();
         sb.columnName = columnName;
-        sb.sql = columnName + " " + type + "(" + length + ")";
+        sb.sql = "`" + columnName + "` " + type + "(" + length + ")";
         return sb;
     }
     
@@ -64,6 +71,11 @@ public class Column {
         return this;
     }
     
+    /**
+     * set a column as primary and select it as auto increment
+     * @param autoIncrement set a key a default increment when add new 
+     * @return 
+     */
     public Column primary(boolean autoIncrement){
         this.sql += " PRIMARY KEY" + (autoIncrement ? " AUTO_INCREMENT " : "");
         return this;
