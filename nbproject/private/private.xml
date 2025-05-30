@@ -6,6 +6,7 @@
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/model/helper/ColumnType.java</file>
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/SelectStatementBuilder.java</file>
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/database/Connector.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/model/pagination/Pagination.java</file>
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/view/MainTest.java</file>
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/model/helper/ColumnInfo.java</file>
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/createschema/Column.java</file>
@@ -14,6 +15,7 @@
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/UpdateStatementBuilder.java</file>
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/InsertStatementBuilder.java</file>
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/database/migration/TableSchema.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/query/Join.java</file>
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/Builder.java</file>
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/model/AbstractModel.java</file>
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/controller/UserController.java</file>
@@ -22,6 +24,7 @@
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/ColumnData.java</file>
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/StatementFillable.java</file>
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/controller/Controller.java</file>
+            <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/query/Condition.java</file>
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/querybuilder/DeleteStatementBuilder.java</file>
             <file>file:/D:/JDBCLibrary/src/jdbclibrary/libs/validator/Validator.java</file>
         </group>

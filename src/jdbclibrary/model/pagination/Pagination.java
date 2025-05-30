@@ -1,13 +1,14 @@
 package jdbclibrary.model.pagination;
 
+import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.sql.ResultSetMetaData;
 
 /**
  * @author Asem
  */
 public class Pagination {
+
     private ArrayList<HashMap<String, String>> data;
     private int totalCount;
     private int currentPage;
@@ -25,11 +26,11 @@ public class Pagination {
         this.totalCount = totalCount;
         this.currentPage = currentPage;
         this.perPage = perPage;
-        this.lastPage = totalCount / perPage;
-        this.from = (currentPage * perPage);
-        this.to = from + data.size();
-        this.nextPage = currentPage == lastPage ? 0 : currentPage +1 ;
-        this.prevPage = currentPage == 0 ? 0 : currentPage -1;
+        this.lastPage = (int) Math.ceil((double) totalCount / perPage);
+        this.from = (currentPage - 1) * perPage + 1;
+        this.to = Math.min(from + data.size() - 1, totalCount);
+        this.nextPage = currentPage < lastPage ? currentPage + 1 : 0;
+        this.prevPage = currentPage > 1 ? currentPage - 1 : 0;
     }
 
     public ArrayList<HashMap<String, String>> getData() {
@@ -89,9 +90,5 @@ public class Pagination {
         sb.append('}');
         return sb.toString();
     }
-    
-    
-    
-    
-    
+
 }

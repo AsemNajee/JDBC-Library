@@ -2,139 +2,154 @@ package jdbclibrary.libs.querybuilder.createschema;
 
 import java.sql.SQLException;
 
-
 public class Column {
+
     private String columnName;
     private String sql;
     public static final int DEFAULT_STRING_LENGTH = 255;
     public static final int DEFAULT_INT_LENGTH = 8;
-    
+
     /**
      * add new column with type string (varchar) in the database
-     * @param columnName is the column name 
+     *
+     * @param columnName is the column name
      * @param length the size of the column
      * @return
      */
-    public static Column string(String columnName, int length){
+    public static Column string(String columnName, int length) {
         return create(columnName, "VARCHAR", length);
     }
-    public static Column string(String columnName){
+
+    public static Column string(String columnName) {
         return string(columnName, DEFAULT_STRING_LENGTH);
     }
-    
+
     /**
      * add new column with type string (varchar) in the database
-     * @param columnName is the column name 
+     *
+     * @param columnName is the column name
      * @param length the size of the column
      * @return
      */
-    public static Column integer(String columnName, int length){
+    public static Column integer(String columnName, int length) {
         return create(columnName, "INT", length);
     }
-    public static Column integer(String columnName){
+
+    public static Column integer(String columnName) {
         return integer(columnName, DEFAULT_INT_LENGTH);
     }
-    
+
     /**
      * add column with predefinde values as enum
+     *
      * @param columnName is the column name
      * @param scope acceptable values
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public static String enumeration(String columnName, String ...scope) throws SQLException{
+    public static Column enumeration(String columnName, String... scope) throws SQLException {
         String paramsImploded = "";
-        for(String p : scope){
+        for (String p : scope) {
             paramsImploded += "'" + p + "',";
         }
-        if(!paramsImploded.equals("")){
+        if (!paramsImploded.equals("")) {
             paramsImploded = paramsImploded.substring(0, paramsImploded.length() - 1);
-        }else{
+        } else {
             throw new SQLException();
         }
-        return "`" + columnName + "` enum(" + paramsImploded + ")";
+        Column sb = new Column();
+        sb.sql += "`" + columnName + "` enum(" + paramsImploded + ")";
+        return sb;
     }
-    
-    private static Column create(String columnName, String type, int length){
+
+    private static Column create(String columnName, String type, int length) {
         Column sb = new Column();
         sb.columnName = columnName;
         sb.sql = "`" + columnName + "` " + type + "(" + length + ")";
         return sb;
     }
-    
+
     /**
      * set a column as primary key in the table
-     * @return 
+     *
+     * @return
      */
-    public Column primary(){
+    public Column primary() {
         primary(false);
         return this;
     }
-    
+
     /**
      * set a column as primary and select it as auto increment
-     * @param autoIncrement set a key a default increment when add new 
-     * @return 
+     *
+     * @param autoIncrement set a key a default increment when add new
+     * @return
      */
-    public Column primary(boolean autoIncrement){
+    public Column primary(boolean autoIncrement) {
         this.sql += " PRIMARY KEY" + (autoIncrement ? " AUTO_INCREMENT " : "");
         return this;
     }
-    
+
     /**
      * add not null constraint to the column
-     * @return 
+     *
+     * @return
      */
-    public Column notNull(){
+    public Column notNull() {
         this.sql += " NOT NULL";
         return this;
     }
-    
+
     /**
      * add unique constraint to the column
-     * @return 
+     *
+     * @return
      */
-    public Column unique(){
+    public Column unique() {
         this.sql += " UNIQUE";
         return this;
     }
-    
+
     /**
      * can be used once for each column, add check constraint
+     *
      * @param condition is the condition of the check constraint
-     * @return 
+     * @return
      */
-    public Column check(String condition){
+    public Column check(String condition) {
         this.sql += " CHECK(" + condition + ")";
         return this;
     }
-    
+
     /**
      * set a column (must be number) unsigned
+     *
      * @param unsigned state of unsigned, set true to set the column as unsigned
-     * @return 
+     * @return
      */
-    public Column unsigned(boolean unsigned){
+    public Column unsigned(boolean unsigned) {
         this.sql += unsigned ? " UNSIGNED" : " SIGNED";
         return this;
     }
-    
+
     /**
      * add foreign key constraint
+     *
      * @param tableName referenced table
      * @param columnName specify the column in the referenced table
-     * @return 
+     * @return
      */
-    public Column foreignKey(String tableName, String columnName){
+    public Column foreignKey(String tableName, String columnName) {
         this.sql += " REFERENCES " + tableName + "(" + columnName + ")";
         return this;
     }
-    
+
     /**
      * get final statement of the column properties
-     * @return 
+     *
+     * @return
      */
-    public String getSql(){
+    public String getSql() {
         return this.sql;
     }
 }

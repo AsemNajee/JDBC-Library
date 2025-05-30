@@ -47,6 +47,7 @@ public class AbstractModel extends ModelColumns {
                 .into(table);
         HashMap<String, String> acceptedColumns = new HashMap<>();
         data.forEach((key, value) -> {
+            // logic error
             if (columnsInfo.get(key).isCanSelect()) {
                 acceptedColumns.put(key, value);
             }

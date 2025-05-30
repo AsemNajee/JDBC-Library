@@ -5,32 +5,35 @@ import jdbclibrary.database.Connector;
 import jdbclibrary.libs.querybuilder.createschema.Column;
 
 /**
- * Create new table in database 
+ * Create new table in database
+ *
  * @author Asem
  */
 public final class TableSchema {
-    
-    private TableSchema(){}
-    
+
+    private TableSchema() {
+    }
+
     /**
      * create new table in database
-     * @param tableName 
+     *
+     * @param tableName
      * @param colsData columns as Column class with them data
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public final static void create(String tableName, Column ...colsData) throws SQLException{
+    public final static void create(String tableName, Column... colsData) throws SQLException, IllegalArgumentException {
+        if (colsData == null || colsData.length == 0) {
+            throw new IllegalArgumentException("Columns data must not be empty");
+        }
         String sql = "CREATE OR REPLACE TABLE `" + tableName + "` (\n";
-        for(Column s : colsData){
+        for (Column s : colsData) {
             sql += s.getSql() + ",\n";
         }
-        System.out.println(sql);
-        sql = sql.substring(0, sql.length() -2);
+        sql = sql.substring(0, sql.length() - 2);
         sql += ")";
-        
-        System.out.println(sql);
-        
-        var c = Connector.getInstance().getConnection();
-        var stat = c.prepareStatement(sql);
-        stat.execute();
+
+        try (var c = Connector.getInstance().getConnection(); var stat = c.prepareStatement(sql);) {
+            stat.execute();
+        }
     }
 }
