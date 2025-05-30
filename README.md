@@ -93,8 +93,6 @@ public class ProductModel extends AbstractModel {
     }
 }
 ```
-**ملاحظة هامة:** إذا لم يكن لديك `ColumnType.DECIMAL`، فستحتاج إلى إضافته إلى تعداد `ColumnType` أو استخدام `ColumnType.STRING` والتعامل مع التحويلات يدويًا في طبقة الـ Model/Service.
-
 ---
 
 ### 3️⃣ إنشاء المتحكم (Controller)
