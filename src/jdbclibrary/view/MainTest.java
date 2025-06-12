@@ -4,12 +4,11 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Scanner;
 import jdbclibrary.database.migration.User;
-import jdbclibrary.libs.filler.Filler;
 import jdbclibrary.libs.querybuilder.Builder;
 import jdbclibrary.model.UserModel;
 
 /**
- * @Coder Asem Najee
+ * @auther Asem Najee
  */
 public class MainTest {
 
